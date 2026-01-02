@@ -6,3 +6,12 @@ body, #root {
     background-color: #f0f2f5;
     min-height: 100vh;
 }
+
+footer {
+    background-color: #6c757d;
+    padding: 20px 100px;
+    color: white;
+    position: static;
+    bottom: 0;
+    width: 100%;
+}

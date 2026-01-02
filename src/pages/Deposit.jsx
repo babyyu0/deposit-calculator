@@ -4,9 +4,9 @@ import '../styles/Savings.css'
 function Saving() {
   // input
   const [payment, setPayment] = useState(0)
-  const [isMonths, setIsMonths] = useState(true)
-  const [months, setMonths] = useState(Number(0))
-  const [days, setDays] = useState(0)
+  const [isYears, setIsYears] = useState(true)
+  const [years, setYears] = useState(0)
+  const [months, setMonths] = useState(0)
   const [interestRate, setInterestRate] = useState(0)
   const [taxType, setTaxType] = useState(15.4)
 
@@ -19,19 +19,17 @@ function Saving() {
 
   const calculate = async() => {
     setResultHidden(false)
-    let curTotalPrincipal = 0
+    let curTotalPrincipal = payment
     let curPretaxInterest = 0
     let curInterestTex = 0
 
-    if(isMonths) {
-      // 월 적립의 경우
-      curTotalPrincipal = payment * months
-      curPretaxInterest = payment * (months * (months + 1) / 2) * (interestRate* 0.01 / 12)
+    if(isYears) {
+      // 연 적립의 경우
+      curPretaxInterest = payment * interestRate * 0.01
       curInterestTex = curPretaxInterest * taxType * 0.01
     } else {
-      // 일 적립의 경우
-      curTotalPrincipal = payment * days
-      curPretaxInterest = payment * (days * (days + 1) / 2) * (interestRate* 0.01 / 365)
+      // 월 적립의 경우
+      curPretaxInterest = payment * months * (interestRate* 0.01 / 12)
       curInterestTex = curPretaxInterest * taxType * 0.01
     }
 
@@ -47,57 +45,50 @@ function Saving() {
   return (
     <div className='savings-container d-flex justify-content-center align-items-start'>
       <div className='savings-frame text-center'>
-        <h2 className='title'>💰 적금 이자 계산기</h2>
+        <h2 className='title'>💰 예금 이자 계산기</h2>
         <div className='input-frame'>
           <div className='text-start'>
-            <label className='input-text'>{isMonths ? "월" : "일"} 납입액</label>
+            <label className='input-text'>예치금액</label>
             <div className='input-group'>
               <input type='number' className='form-control' value={payment} onChange={(e) => { setPayment(e.target.value) }} />
               <span className="input-group-text">원</span>
             </div>
           </div>
-          <div className="btn-group" hidden={!isMonths}>
+          <div className="btn-group">
             <button type="button" className="btn btn-light" onClick={() => { setPayment(0) }}>C</button>
-            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 100000) }}>+10만</button>
-            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 300000) }}>+30만</button>
-            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 500000) }}>+50만</button>
             <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 1000000) }}>+100만</button>
-          </div>
-          <div className="btn-group" hidden={isMonths}>
-            <button type="button" className="btn btn-light" onClick={() => { setPayment(0) }}>C</button>
-            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 10000) }}>+1만</button>
-            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 30000) }}>+3만</button>
-            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 50000) }}>+5만</button>
-            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 100000) }}>+10만</button>
+            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 3000000) }}>+300만</button>
+            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 5000000) }}>+500만</button>
+            <button type="button" className="btn btn-light" onClick={() => { setPayment(payment + 10000000) }}>+1000만</button>
           </div>
         </div>
         <div className='input-frame'>
           <div className='text-start'>
-            <label className='input-text'>적립 기간 (
-              <input type="radio" className="form-check-input month-check" checked={isMonths} onChange={(e) => { setIsMonths(e.target.value) }} /> 개월
-              <input type="radio" className="form-check-input month-check" checked={!isMonths} onChange={(e) => { setIsMonths(!e.target.value) }} /> 일
+            <label className='input-text'>예금기간 (
+              <input type="radio" className="form-check-input month-check" checked={isYears} onChange={(e) => { setIsYears(e.target.value) }} /> 년
+              <input type="radio" className="form-check-input month-check" checked={!isYears} onChange={(e) => { setIsYears(!e.target.value) }} /> 개월
               )</label>
             <div className='input-group'>
               <input type='number' className='form-control'
-                value={isMonths ? months : days}
+                value={isYears ?  years : months}
                 onChange={(e) => {
-                  if (isMonths) setMonths(e.target.value);
-                  else setDays(e.target.value)
+                  if (isYears) setYears(e.target.value);
+                  else setMonths(e.target.value)
                 }} />
-              <span className="input-group-text">{isMonths ? "월" : "일"}</span>
+              <span className="input-group-text">{isYears ? "년" : "월"}</span>
             </div>
           </div>
-          <div className="btn-group" hidden={!isMonths}>
+          <div className="btn-group" hidden={!isYears}>
+            <button type="button" className="btn btn-light" onClick={() => { setYears(0) }}>C</button>
+            <button type="button" className="btn btn-light" onClick={() => { setYears(1) }}>1년</button>
+            <button type="button" className="btn btn-light" onClick={() => { setYears(2) }}>2년</button>
+            <button type="button" className="btn btn-light" onClick={() => { setYears(3) }}>3년</button>
+          </div>
+          <div className="btn-group" hidden={isYears}>
             <button type="button" className="btn btn-light" onClick={() => { setMonths(0) }}>C</button>
             <button type="button" className="btn btn-light" onClick={() => { setMonths(6) }}>6개월</button>
             <button type="button" className="btn btn-light" onClick={() => { setMonths(12) }}>12개월</button>
             <button type="button" className="btn btn-light" onClick={() => { setMonths(24) }}>24개월</button>
-          </div>
-          <div className="btn-group" hidden={isMonths}>
-            <button type="button" className="btn btn-light" onClick={() => { setDays(0) }}>C</button>
-            <button type="button" className="btn btn-light" onClick={() => { setDays(30) }}>30일</button>
-            <button type="button" className="btn btn-light" onClick={() => { setDays(100) }}>100일</button>
-            <button type="button" className="btn btn-light" onClick={() => { setDays(365) }}>365일</button>
           </div>
         </div>
         <div className='input-frame'>

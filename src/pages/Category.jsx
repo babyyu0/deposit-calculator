@@ -1,8 +1,10 @@
-import './Category.css'
+import '../styles/Category.css'
 
-function Category() {
+function Category({setSelected}) {
   return (
-    <div className='container'>
+    <div className='category-container d-flex justify-content-center'>
+      <button type="button" class="btn btn-dark" onClick={() => {setSelected("savings")}}>적금</button>
+      <button type="button" class="btn btn-dark" onClick={() => {setSelected("deposit")}}>예금</button>
     </div>
   )
 }
