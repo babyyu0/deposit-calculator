@@ -1,0 +1,8 @@
+* {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+body, #root {
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}

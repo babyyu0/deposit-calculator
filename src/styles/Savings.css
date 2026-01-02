@@ -1,0 +1,63 @@
+.title {
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.savings-container {
+    min-height: 100vh;
+}
+
+.savings-frame {
+    padding: 3rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.input-frame {
+    padding: 8px 0;
+}
+
+.input-text {
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: #666;
+}
+
+.btn-group {
+    margin-top: 6px;
+    width: 100%;
+}
+
+.btn-group>button {
+    font-size: 14px;
+}
+
+.btn-calculate {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 6px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.month-check:last-of-type {
+    margin-left: 10px;
+}
+
+.result-frame {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.result-frame>div:last-child {
+    padding-top: 1rem;
+    font-size: 24px;
+    font-weight: bold;
+    border-top: 2px dashed #ddd;
+}
